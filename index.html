@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭкоПласт - Приём пластика на переработку</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        /* Герой секция */
+        .hero {
+            padding: 150px 0 100px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1604176354204-9268737828e4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        
+        /* Услуги */
+        .services {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Цены */
+        .pricing {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .price-table th, .price-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .price-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        /* Контакты */
+        .contact {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        /* Подвал */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+            }
+            
+            .quick-actions a {
+                margin-left: 0 !important;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-recycle"></i>
+                    <span>ЭкоПласт</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#pricing">Цены</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                    <li><a href="tel:+79991234567" class="btn">Позвонить</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой секция -->
+    <section class="hero">
+        <div class="container">
+            <h1>Приём пластика на переработку</h1>
+            <p>Мы покупаем пластиковые отходы у населения и организаций по выгодным ценам. Вносим вклад в экологию!</p>
+            <a href="#contact" class="btn">Сдать пластик</a>
+        </div>
+    </section>
+
+    <!-- Услуги -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши услуги</h2>
+                <p>Мы принимаем различные виды пластика для дальнейшей переработки</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bottle-water"></i>
+                    </div>
+                    <h3>ПЭТ-бутылки</h3>
+                    <p>Принимаем прозрачные и цветные ПЭТ-бутылки от напитков</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Полиэтилен</h3>
+                    <p>Пакеты, плёнка, упаковка с маркировкой HDPE и LDPE</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Посуда</h3>
+                    <p>Пластиковые контейнеры, одноразовая посуда (PP)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Цены -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Наши цены</h2>
+                <p>Актуальные расценки на приём пластика</p>
+            </div>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Тип пластика</th>
+                        <th>Маркировка</th>
+                        <th>Цена за кг</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ПЭТ-бутылки</td>
+                        <td>PET (1)</td>
+                        <td>25 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Полиэтилен высокого давления</td>
+                        <td>HDPE (2)</td>
+                        <td>30 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Полиэтилен низкого давления</td>
+                        <td>LDPE (4)</td>
+                        <td>20 руб.</td>
+                    </tr>
+                    <tr>
+                        <td>Полипропилен</td>
+                        <td>PP (5)</td>
+                        <td>35 руб.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Контакты</h2>
+                <p>Свяжитесь с нами для сдачи пластика</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Наш адрес</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Экологическая, 10</p>
+                    
+                    <h3>Телефон/WhatsApp</h3>
+                    <p>
+                        <a href="tel:+79991234567" style="color: inherit; text-decoration: none;">
+                            <i class="fas fa-phone"></i> +7 (999) 123-45-67
+                        </a>
+                    </p>
+                    
+                    <h3>Telegram</h3>
+                    <p>
+                        <a href="https://t.me/your_username" target="_blank" style="color: inherit; text-decoration: none;">
+                            <i class="fab fa-telegram"></i> @EcoPlast_bot
+                        </a>
+                    </p>
+                    
+                    <h3>Email</h3>
+                    <p>
+                        <a href="mailto:ecoplast@mail.ru" style="color: inherit; text-decoration: none;">
+                            <i class="fas fa-envelope"></i> ecoplast@mail.ru
+                        </a>
+                    </p>
+                    
+                    <h3>Режим работы</h3>
+                    <p><i class="fas fa-clock"></i> Пн-Пт: 9:00-18:00<br>Сб: 10:00-15:00</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Оставить заявку</h3>
+                    <form id="order-form">
+                        <input type="text" name="name" placeholder="Ваше имя" required>
+                        <input type="tel" name="phone" placeholder="Ваш телефон" required>
+                        <select name="plastic-type" required>
+                            <option value="" disabled selected>Выберите тип пластика</option>
+                            <option value="PET">ПЭТ-бутылки (25 руб/кг)</option>
+                            <option value="HDPE">Полиэтилен высокого давления (30 руб/кг)</option>
+                            <option value="LDPE">Полиэтилен низкого давления (20 руб/кг)</option>
+                            <option value="PP">Полипропилен (35 руб/кг)</option>
+                        </select>
+                        <textarea name="message" placeholder="Дополнительная информация"></textarea>
+                        <button type="submit" class="btn">Отправить заявку</button>
+                    </form>
+                    
+                    <!-- Альтернативные способы связи -->
+                    <div class="quick-actions">
+                        <a href="https://t.me/your_username" class="btn" style="background-color: #0088cc;">
+                            <i class="fab fa-telegram"></i> Написать в Telegram
+                        </a>
+                        <a href="viber://chat?number=+79991234567" class="btn" style="background-color: #7360f2; margin-left: 10px;">
+                            <i class="fab fa-viber"></i> Написать в Viber
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <p>© 2023 ИП "ЭкоПласт". Все права защищены.</p>
+            <p>Сделаем планету чище вместе!</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Ваши данные для Telegram
+            const botToken = '8039799949:AAFxAF1ScVCzV-OKH3IwvN_OukHGLR1iSk0';
+            const chatId = '5103411502';
+            
+            // Форматируем сообщение
+            const message = `🔥 Новая заявка с сайта:\n\n` +
+                            `👤 Имя: ${data.name}\n` +
+                            `📞 Телефон: ${data.phone}\n` +
+                            `🔄 Тип пластика: ${data['plastic-type']}\n` +
+                            `📝 Сообщение: ${data.message || 'Нет дополнительной информации'}\n\n` +
+                            `⏰ Время заявки: ${new Date().toLocaleString()}`;
+            
+            // Отправка в Telegram
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+                .then(response => {
+                    alert('✅ Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+                    this.reset();
+                })
+                .catch(error => {
+                    console.error('Ошибка:', error);
+                    alert('❌ Произошла ошибка при отправке. Позвоните нам напрямую по телефону.');
+                });
+        });
+    </script>
+</body>
+</html>
